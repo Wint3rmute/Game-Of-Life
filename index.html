@@ -1,0 +1,111 @@
+<html>
+
+  <head>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"> </script>
+  <script>
+
+      var login;
+      var theUrl;
+      var baseUrl = "http://hythere.ct8.pl/send.php/";
+      var message;
+      var currentId;
+
+      function getCurrentId() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      currentId = parseInt(this.responseText);
+    }
+  };
+  xhttp.open("GET", "http://hythere.ct8.pl/getCurrentId.php", true);
+  xhttp.send();
+}
+
+
+
+
+      function httpSend(theUrl)
+      {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", theUrl, false); // true for asynchronous
+        xmlHttp.send();
+
+      }
+
+      function login()
+      {
+        login = prompt("Enter your name:");
+
+        while(login == "")
+        {
+          login = prompt("Please, tell me your name:");
+        }
+        document.getElementById("message").placeholder = login + "'s message..";
+
+setInterval("receive()", 1000);
+
+document.getElementById("message") .addEventListener("keyup", function(event) { event.preventDefault(); if (event.keyCode == 13) { document.getElementById("sendButton").click(); } });
+
+      }
+
+      function send()
+      {
+        message = document.getElementById("message").value;
+
+document.getElementById("message").value= "";
+        theUrl = baseUrl + "?l=" + login + "&m=" + message;
+        httpSend(theUrl);
+
+receive();
+
+      }
+
+      function receive()
+      {
+
+var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+    document.getElementById("chat").innerHTML=(this.responseText);
+    }
+  };
+
+  xhttp.open("GET", "http://hythere.ct8.pl/receive.php?i=" + currentId, true);
+  xhttp.send();
+
+
+getCurrentId();
+      }
+
+    </script>
+
+  </head>
+
+
+<body onload="login(); getCurrentId();">
+
+  <div id = "top">
+      Chat. Simply put.
+  </div>
+
+  <div id = "chat">
+
+  </div>
+
+  <div id = "input">
+
+<input  type="text" maxlength="100" id="message" placeholder="Your message.."/>
+<button id="sendButton" onclick="send();">Send</button>
+
+  </div>
+
+
+
+</body>
+
+</html>
