@@ -1,111 +1,76 @@
 <html>
+<head>
 
-  <head>
+<script type="text/javascript" src="gol.js"></script>
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+	<style>
+	body
+	{
+	background-color: #fdfdf0;
+	}
+		header
+		{
+		background-color: lightgray;
+		width: 100%;
+		height: 50px;
+		font-size: 45px;
+		font-weight: 900;
+		padding: 5px 0px;
+		text-align: center;
+		border: 1px solid black;
+		margin-bottom: 20px;
+		}
+		#redfred
+		{
+		width:1200px;
+		margin-left: auto;
+		margin-right: auto;
+		}
+		#controls
+		{
+		border: 1px solid black;
+		width:150px;
+		pading: 10px;
+		height: 800px;
+		float:right;
+		}
+		#controls button
+		{
+		margin-top: 20px;
+		margin-left: 20px;
+		}
+		#controls input
+		{
+		width: 100px;
+		margin-left: 25px;
+		margin-top: 30px;
+		}
 
+		#speed
+		{
+			margin-left: auto;
+			margin-right: auto;
+			text-align: center;
+			line-height: 50px;
+		}
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"> </script>
-  <script>
+	</style>
 
-      var login;
-      var theUrl;
-      var baseUrl = "http://hythere.ct8.pl/send.php/";
-      var message;
-      var currentId;
+</head>
+<body onload = "start();" >
+	<header >
+		Game of life
+	</header>
+	<div id="redfred">
+			<div id="controls">
 
-      function getCurrentId() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      currentId = parseInt(this.responseText);
-    }
-  };
-  xhttp.open("GET", "http://hythere.ct8.pl/getCurrentId.php", true);
-  xhttp.send();
-}
+			<Button id = "pauseUnpause" onclick = "pauseUnpause();"> Pause/Unpause </Button>
+			<input type="range" id="myRange" value="50" onchange="changeRefreshRate();">
 
+			<div id = "speed"> </div>
 
-
-
-      function httpSend(theUrl)
-      {
-        var xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("GET", theUrl, false); // true for asynchronous
-        xmlHttp.send();
-
-      }
-
-      function login()
-      {
-        login = prompt("Enter your name:");
-
-        while(login == "")
-        {
-          login = prompt("Please, tell me your name:");
-        }
-        document.getElementById("message").placeholder = login + "'s message..";
-
-setInterval("receive()", 1000);
-
-document.getElementById("message") .addEventListener("keyup", function(event) { event.preventDefault(); if (event.keyCode == 13) { document.getElementById("sendButton").click(); } });
-
-      }
-
-      function send()
-      {
-        message = document.getElementById("message").value;
-
-document.getElementById("message").value= "";
-        theUrl = baseUrl + "?l=" + login + "&m=" + message;
-        httpSend(theUrl);
-
-receive();
-
-      }
-
-      function receive()
-      {
-
-var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-    document.getElementById("chat").innerHTML=(this.responseText);
-    }
-  };
-
-  xhttp.open("GET", "http://hythere.ct8.pl/receive.php?i=" + currentId, true);
-  xhttp.send();
-
-
-getCurrentId();
-      }
-
-    </script>
-
-  </head>
-
-
-<body onload="login(); getCurrentId();">
-
-  <div id = "top">
-      Chat. Simply put.
-  </div>
-
-  <div id = "chat">
-
-  </div>
-
-  <div id = "input">
-
-<input  type="text" maxlength="100" id="message" placeholder="Your message.."/>
-<button id="sendButton" onclick="send();">Send</button>
-
-  </div>
-
-
-
+			</div>
+			<canvas id="fred" width="1000" height="800"  style="border:1px solid #000000;" onclick="onClick(event);"> </canvas>
+	</div>
 </body>
-
 </html>
