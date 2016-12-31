@@ -126,9 +126,11 @@ class GameOfLife {
 		}
 
 	drawSquare10(x,y){
-		this.ctx.strokeStyle="red";
+		this.ctx.fillStyle="#48af23";
 		this.ctx.rect(x,y,10,10);
 		this.ctx.stroke();
+		this.ctx.fillStyle = "#48af23";
+    this.ctx.fillRect(x,y, 10,10);
 	}
 
 	draw(){
@@ -164,7 +166,6 @@ class GameOfLife {
 /*
 var canvas;
 var ctx;
-
 function init(){
 canvas = document.getElementById("fred");
 ctx = canvas.getContext("2d");
