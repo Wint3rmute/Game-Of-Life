@@ -126,11 +126,10 @@ class GameOfLife {
 		}
 
 	drawSquare10(x,y){
+		this.ctx.fillStyle = "#48af23";
+		this.ctx.fillRect(x,y, 10,10);
 		this.ctx.fillStyle="#48af23";
 		this.ctx.rect(x,y,10,10);
-		this.ctx.stroke();
-		this.ctx.fillStyle = "#48af23";
-    this.ctx.fillRect(x,y, 10,10);
 	}
 
 	draw(){
@@ -145,7 +144,7 @@ class GameOfLife {
 				}
 			}
 		}
-
+		this.ctx.stroke();
 	}
 
 	cycle(){
@@ -157,6 +156,8 @@ class GameOfLife {
 
 	pauseUnpause(){
 		this.simulating = !this.simulating;
+		if(this.simulating) document.getElementById("pauseUnpause").innerHTML = "Pause";
+		else document.getElementById("pauseUnpause").innerHTML = "Unpause";
 
 	}
 
@@ -197,7 +198,6 @@ setTimeout(cycle, GOL.refreshRate);
 
 function pauseUnpause()
 {
-
 	GOL.pauseUnpause();
 }
 
