@@ -223,3 +223,12 @@ function onClick(event)
   GOL.lifeMap[arrayY][arrayX] = !GOL.lifeMap[arrayY][arrayX];
   GOL.draw();
 }
+
+function clearButton()
+{
+	if(GOL.simulating)
+	pauseUnpause();
+
+	GOL.clearLifeMap();
+	GOL.draw();
+	}

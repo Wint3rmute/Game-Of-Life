@@ -39,7 +39,7 @@ body
 		float:right;
 		background-color: rgba(37, 48, 33, 0.7);
 		}
-		#pauseUnpause
+		.button
 		{
 			text-align: center;
 		width:110px;
@@ -51,7 +51,7 @@ body
 		margin-left: auto;
 		font-size: 20px;
 		}
-		#pauseUnpause:hover
+		.button:hover
 		{
 			cursor:pointer;
 			background-color:rgb(88, 96, 85);
@@ -97,7 +97,7 @@ body
 			background-color: rgb(147, 160, 142);
 			color:black;
 		}
-		
+
 		#speedSettings:hover
 		{
 			cursor:pointer;

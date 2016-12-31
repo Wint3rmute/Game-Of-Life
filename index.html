@@ -21,13 +21,15 @@
 	<div id="redfred">
 			<div id="controls">
 
-			<div id = "pauseUnpause" onclick = "pauseUnpause();"> Unpause </div>
+			<div id = "pauseUnpause" class = "button" onclick = "pauseUnpause();"> Unpause </div>
 
 			<div id = "speedSettings">
 			<div id = "speedText"> Speed </div>
 			<input type="range" id="myRange" value="50" onchange="changeRefreshRate();">
 			<div id = "speed"> 500 </div>
 			</div>
+
+			<div id="clearButton" class = "button" onclick= "clearButton()">Clear</div>
 			</div>
 			<canvas id="fred" width="1000" height="800"   onclick="onClick(event);" opacity = "0"> </canvas>
 	</div>
